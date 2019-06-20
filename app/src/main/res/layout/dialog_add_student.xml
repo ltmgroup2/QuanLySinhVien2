@@ -25,6 +25,7 @@
             android:layout_weight="6"
             android:ems="10"
             android:inputType="textPersonName"
+            android:hint="Mã Sinh Viên"
             android:text="" />
     </LinearLayout>
     <LinearLayout
@@ -46,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
+            android:hint="Tên Sinh Viên"
             android:inputType="textPersonName"
             android:text="" />
     </LinearLayout>
@@ -67,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="6"
+            android:hint="Lớp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="" />
@@ -90,7 +93,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:hint="Ngày Tháng Năm Sinh"
+            android:inputType="datetime"
             android:text="" />
     </LinearLayout>
     <LinearLayout
@@ -112,6 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
+            android:hint="Chuyên Ngành"
             android:inputType="textPersonName"
             android:text="" />
     </LinearLayout>
