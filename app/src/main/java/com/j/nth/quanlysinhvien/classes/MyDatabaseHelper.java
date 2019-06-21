@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
@@ -23,15 +24,41 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(sql,null);
     }
+    public void insertSinhVien(SinhVien sinhVien) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO SINHVIEN VALUES(?,?,?,?,?,?)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1,sinhVien.getMaSV());
+        statement.bindString(2,sinhVien.getTenSV());
+        statement.bindString(3,sinhVien.getLopSV());
+        statement.bindString(4,sinhVien.getNamSinh().toString());
+        statement.bindString(5,sinhVien.getChuyenNganh());
+        statement.bindBlob(6,sinhVien.getHinhAnh());
+
+        statement.executeInsert();
+    }
+    public void updateSinhVien(SinhVien sinhVien) {
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "UPDATE SINHVIEN SET TENSV = ?,LOPSV = ?,CN = ?,NAMSINH = ?,HINHANH = ? WHERE MASV = ?";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(6,sinhVien.getMaSV());
+        statement.bindString(1,sinhVien.getTenSV());
+        statement.bindString(2,sinhVien.getLopSV());
+        statement.bindString(3,sinhVien.getNamSinh().toString());
+        statement.bindString(4,sinhVien.getChuyenNganh());
+        statement.bindBlob(5,sinhVien.getHinhAnh());
+
+        statement.executeUpdateDelete();
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql="CREATE TABLE IF NOT EXISTS SINHVIEN(MASV VARCHAR(200) PRIMARY KEY," +
-                "TENSV VARCHAR(200)," +
-                "LOPSV VARCHAR(200),NAMSINH DATETIME," +
-                "CN VARCHAR(200)," +
-                "HINHANH BLOB)";
-        db.execSQL(sql);
+
+
     }
 
     @Override

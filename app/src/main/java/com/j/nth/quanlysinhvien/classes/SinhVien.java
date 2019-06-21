@@ -6,7 +6,7 @@ public class SinhVien {
     String MaSV;
     String TenSV;
     String LopSV;
-    Date NamSinh;
+    String NamSinh;
     String ChuyenNganh;
     byte HinhAnh[];
 
@@ -34,11 +34,11 @@ public class SinhVien {
         LopSV = lopSV;
     }
 
-    public Date getNamSinh() {
+    public String getNamSinh() {
         return NamSinh;
     }
 
-    public void setNamSinh(Date namSinh) {
+    public void setNamSinh(String namSinh) {
         NamSinh = namSinh;
     }
 
@@ -58,7 +58,7 @@ public class SinhVien {
         HinhAnh = hinhAnh;
     }
 
-    public SinhVien(String maSV, String tenSV, String lopSV, Date namSinh, String chuyenNganh, byte[] hinhAnh) {
+    public SinhVien(String maSV, String tenSV, String lopSV, String namSinh, String chuyenNganh, byte[] hinhAnh) {
         MaSV = maSV;
         TenSV = tenSV;
         LopSV = lopSV;

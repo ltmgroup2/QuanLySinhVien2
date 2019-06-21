@@ -2,13 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_title_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff0"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="Thêm Sinh Viên"
+        android:textColor="#ff02"
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="16dp"
         android:weightSum="10">
 
         <TextView
@@ -24,14 +37,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="Mã Sinh Viên"
+            android:inputType="textPersonName"
             android:text="" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="16dp"
         android:weightSum="10">
 
         <TextView
@@ -51,10 +66,12 @@
             android:inputType="textPersonName"
             android:text="" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="16dp"
         android:weightSum="10">
 
         <TextView
@@ -69,15 +86,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="6"
-            android:hint="Lớp"
             android:ems="10"
+            android:hint="Lớp"
             android:inputType="textPersonName"
             android:text="" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="16dp"
         android:weightSum="10">
 
         <TextView
@@ -93,14 +112,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
-            android:hint="Ngày Tháng Năm Sinh"
+            android:hint="dd/MM/yyyy"
             android:inputType="datetime"
             android:text="" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="16dp"
         android:weightSum="10">
 
         <TextView
@@ -124,13 +145,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/imageViewHinhSV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/users" />
 
         <Button
             android:id="@+id/btnLayHinhAnh"
@@ -138,21 +160,24 @@
             android:layout_height="wrap_content"
             android:text="Chọn hình ảnh" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center">
+
         <Button
             android:id="@+id/btnDialogDongY"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đồng ý"/>
+            android:text="Đồng ý" />
+
         <Button
             android:id="@+id/btnDialogHuy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hủy"/>
+            android:text="Hủy" />
     </LinearLayout>
 
 

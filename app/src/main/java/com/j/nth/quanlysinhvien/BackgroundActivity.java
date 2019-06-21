@@ -20,11 +20,15 @@ public class BackgroundActivity extends AppCompatActivity {
                 }finally {
                     Intent intent = new Intent(BackgroundActivity.this,MainActivity.class);
                     startActivity(intent);
-                    //overridePendingTransition(R.anim.anim_exit_left,R.anim.anim_enter_left);
+                    overridePendingTransition(R.anim.anim_exit_left,R.anim.anim_enter_left);
                 }
             }
         });
         thread.start();
 
+    }
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }

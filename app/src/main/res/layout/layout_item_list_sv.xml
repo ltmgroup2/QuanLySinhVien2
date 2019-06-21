@@ -2,13 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:background="@drawable/bg_stoke"
+    android:elevation="10dp"
+    android:outlineSpotShadowColor="@color/colorPrimary"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imageViewLstHinhSV"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
         tools:srcCompat="@tools:sample/avatars" />
 
     <LinearLayout
@@ -21,12 +26,18 @@
             android:id="@+id/txtLstTenSV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textColor="#3F51B5"
             android:text="TenSV" />
 
         <TextView
             android:id="@+id/txtLstLop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textColor="#000"
             android:text="LopSV" />
     </LinearLayout>
 </LinearLayout>
