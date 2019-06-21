@@ -1,5 +1,6 @@
 package com.j.nth.quanlysinhvien;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,12 +20,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -40,6 +43,7 @@ import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -177,6 +181,23 @@ public class MainActivity extends AppCompatActivity {
         btnDongY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(txtMaSV.getText().toString().equals("")||txtTenSV.getText().toString().equals("")||txtLop.getText().toString().equals("")||txtNamSinh.getText().toString().equals("")||txtChuyenNganh.getText().toString().equals("")) {
+                    Toast.makeText(MainActivity.this,"Bạn chưa nhập đủ thông tin",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                try {
+                    String arr[] = txtNamSinh.getText().toString().split("\\/");
+                    Calendar calendar = Calendar.getInstance();
+                    int nam = calendar.get(Calendar.YEAR);
+                    int nam2 = Integer.parseInt(arr[2]);
+                    if((nam - nam2) < 18) {
+                        Toast.makeText(MainActivity.this,"Không đủ tuổi",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }catch (Exception e)
+                {
+                    Toast.makeText(MainActivity.this,"Đã xảy ra lỗi trong quá trình xử lý",Toast.LENGTH_SHORT).show();
+                }
                 SinhVien sinhVien = new SinhVien(txtMaSV.getText().toString(),
                         txtTenSV.getText().toString(),
                         txtLop.getText().toString(),
@@ -262,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String sql = "DELETE FROM SINHVIEN WHERE MASV = "+sinhVien.getMaSV();
+                        Log.d("AAA",sinhVien.getMaSV());
                         db.query(sql);
                         LoadData();
                         Toast.makeText(MainActivity.this, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
