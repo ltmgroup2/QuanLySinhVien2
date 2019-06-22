@@ -216,14 +216,20 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 try {
-                    String arr[] = txtNamSinh.getText().toString().split("\\/");
-                    Calendar calendar = Calendar.getInstance();
-                    int nam = calendar.get(Calendar.YEAR);
-                    int nam2 = Integer.parseInt(arr[2]);
-                    if((nam - nam2) < 18) {
-                        Toast.makeText(MainActivity.this,"Không đủ tuổi",Toast.LENGTH_SHORT).show();
+                    if (checkNamSinh()) {
+                        Toast.makeText(MainActivity.this, "Năm sinh không đúng!", Toast.LENGTH_SHORT).show();
                         return;
+                    } else {
+                        String arr[] = txtNamSinh.getText().toString().split("\\/");
+                        Calendar calendar = Calendar.getInstance();
+                        int nam = calendar.get(Calendar.YEAR);
+                        int nam2 = Integer.parseInt(arr[2]);
+                        if((nam - nam2) < 18) {
+                            Toast.makeText(MainActivity.this,"Không đủ tuổi",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                     }
+
                 }catch (Exception e)
                 {
                     Toast.makeText(MainActivity.this,"Đã xảy ra lỗi trong quá trình xử lý",Toast.LENGTH_SHORT).show();
@@ -236,8 +242,13 @@ public class MainActivity extends AppCompatActivity {
                         ImageView_To_Byte(avatar)
                         );
                 if (action.equals("Thêm")) {
-                    Toast.makeText(MainActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
-                    db.insertSinhVien(sinhVien);
+                    if (checkSinhVien()) {
+                        Toast.makeText(MainActivity.this, "Sinh Viên Đã Tồn Tại!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+                        db.insertSinhVien(sinhVien);
+                    }
+
                 } else {
                     Toast.makeText(MainActivity.this, "Sửa Thành Công", Toast.LENGTH_SHORT).show();
                     db.updateSinhVien(sinhVien);
@@ -256,7 +267,33 @@ public class MainActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+    private boolean checkSinhVien() {
+        for (SinhVien sv : sinhVienArrayList) {
+            if (sv.getMaSV().equals(txtMaSV.getText().toString()))
+                return true;
+        }
 
+        return false;
+    }
+    private boolean checkNamSinh(){
+        String ns = txtNamSinh.getText().toString();
+        String date = ns.substring(0,2);
+        String month = ns.substring(3,5);
+        Log.d("ns",date+"||"+month);
+        if (ns.length() != 10) return true;
+        if (Integer.parseInt(date) > 31) {
+            return true;
+        } else {
+            if (Integer.parseInt(date) > 30 && (Integer.parseInt(month) == 4 || Integer.parseInt(month) == 6 || Integer.parseInt(month) == 9 || Integer.parseInt(month) == 11)) {
+                return true;
+            }
+            if (Integer.parseInt(date) > 29 && Integer.parseInt(month) == 2) {
+                return true;
+            }
+        }
+        if (Integer.parseInt(month) > 12) return true;
+        return false;
+    }
     private void LoadData() {
         Cursor sv  = db.GetData("select * from SINHVIEN");
 
@@ -312,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String sql = "DELETE FROM SINHVIEN WHERE MASV = "+sinhVien.getMaSV();
+                        String sql = "DELETE FROM SINHVIEN WHERE MASV = '"+sinhVien.getMaSV()+"'";
                         Log.d("AAA",sinhVien.getMaSV());
                         db.query(sql);
                         LoadData();

@@ -93,7 +93,7 @@ public class adapterSV extends BaseAdapter {
                 constraint = constraint.toString().toLowerCase();
                 ArrayList<SinhVien> filters = new ArrayList<>();
                 for (SinhVien sv : filterList) {
-                    if (sv.getTenSV().toLowerCase().contains(constraint)) {
+                    if (sv.getTenSV().toLowerCase().contains(constraint) || sv.getLopSV().toLowerCase().contains(constraint)) {
                         filters.add(sv);
                     }
                 }
