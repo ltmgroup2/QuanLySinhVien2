@@ -9,12 +9,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,6 +52,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+    private DrawerLayout drawerLayout;
     private FloatingActionButton btnAdd;
     private SearchView searchViewExample;
     private GridView gridView;
@@ -61,13 +67,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        drawerLayout = findViewById(R.id.drawer_layout);
         btnAdd = findViewById(R.id.btn_add_dialog);
         searchViewExample = findViewById(R.id.search_view_example);
         txtTitle = findViewById(R.id.txt_title);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
 
+        Navigation();
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +108,37 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
     }
+    private void Navigation() {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                // set item as selected to persist highlight
+                menuItem.setChecked(true);
+                switch (menuItem.getItemId()) {
+                    case R.id.android:
+                        Toast.makeText(MainActivity.this, "https://ltt.edu.vn", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.rateUs:
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:02838110521"));
+                        startActivity(intent);
+                        break;
+
+                }
+                // close drawer when item is tapped
+                drawerLayout.closeDrawers();
+
+                // Add code here to update the UI based on the item selected
+                // For example, swap UI fragments here
+
+                return true;
+            }
+        });
+    }
+
     private void setEventSearchView() {
         searchViewExample.setOnSearchClickListener(new View.OnClickListener() {
             @Override
@@ -128,16 +168,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void SearchData(String search) {
-        ArrayList<SinhVien> sinhViens = new ArrayList<>();
-        for (SinhVien sv : sinhVienArrayList) {
-            if (search.toLowerCase().contains(search)) {
-                sinhViens.add(sv);
-            }
-        }
-        adapterSV = new adapterSV(this,R.layout.layout_item_list_sv , sinhViens);
-        gridView.setAdapter(adapterSV);
-    }
     TextView txtTitleDialog;
     EditText txtMaSV,txtTenSV,txtLop,txtNamSinh,txtChuyenNganh;
     ImageView avatar;
@@ -302,7 +332,15 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void CreateTable() {
         String sql="CREATE TABLE IF NOT EXISTS SINHVIEN(MASV VARCHAR(200) PRIMARY KEY," +
                 "TENSV VARCHAR(200)," +

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/android"
+            android:icon="@drawable/ic_account_balance_black_24dp"
+            android:title="Trang Chủ"/>
+        <item android:id="@+id/rateUs"
+            android:icon="@drawable/ic_stars_black_24dp"
+            android:title="Liên Hệ: (028) 3811.0521"/>
+
+    </group>
+</menu>

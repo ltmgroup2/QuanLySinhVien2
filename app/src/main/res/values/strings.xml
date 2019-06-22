@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Danh Sách Sinh Viên</string>
+    <string name="android">Android</string>
+    <string name="rateUs">Rate Us</string>
+    <string name="donate">Donate</string>
+    <string name="feedback">Feedback</string>
+    <string name="moretutorials">More Tutorials</string>
 </resources>
