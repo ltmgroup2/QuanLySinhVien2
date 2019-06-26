@@ -112,9 +112,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         String sql_tableStaff="CREATE TABLE IF NOT EXISTS STAFF (" +
                 "STAFF_ID VARCHAR(100) PRIMARY KEY," +
                 "NAME_STAFF VARCHAR(100)," +
-                "AGE_STAFF INT," +
-                "ADDRESS VARCHAR(100)," +
-                "ID_ACCOUNT INTEGER" +
+                "BIRTH_STAFF VARCHAR(100)," +
+                "ADDRESS VARCHAR(100)" +
                 ")";
         String sql_account = "CREATE TABLE IF NOT EXISTS ACCOUNT(" +
                 "ID_ACCOUNT INTEGER PRIMARY KEY AUTOINCREMENT," +

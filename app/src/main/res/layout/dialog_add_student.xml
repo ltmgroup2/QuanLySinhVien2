@@ -32,7 +32,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Mã SV:" />
+            android:text="Mã NV:" />
 
         <EditText
             android:id="@+id/txtMaSV"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
-            android:hint="Mã Sinh Viên"
+            android:hint="Mã VN"
             android:inputType="textPersonName"
             android:text="" />
     </LinearLayout>
@@ -57,7 +57,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Tên SV" />
+            android:text="Tên VN" />
 
         <EditText
             android:id="@+id/txtTenSV"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
-            android:hint="Tên Sinh Viên"
+            android:hint="Tên Nhân Viên"
             android:inputType="textPersonName"
             android:text="" />
     </LinearLayout>
@@ -82,7 +82,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Lớp" />
+            android:text="Địa Chỉ NV" />
 
         <EditText
             android:id="@+id/txtLop"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
-            android:hint="Lớp"
+            android:hint="Địa Chỉ Nhân Viên"
             android:inputType="textPersonName"
             android:text="" />
     </LinearLayout>
@@ -107,7 +107,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Năm Sinh" />
+            android:text="Năm Sinh NV" />
 
         <EditText
             android:id="@+id/txtNamSinh"
@@ -117,31 +117,6 @@
             android:ems="10"
             android:hint="dd/MM/yyyy"
             android:inputType="datetime"
-            android:text="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:weightSum="10">
-
-        <TextView
-            android:id="@+id/tvChuyenNganh"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:text="Chuyên Ngành" />
-
-        <EditText
-            android:id="@+id/txtChuyenNganh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:ems="10"
-            android:hint="Chuyên Ngành"
-            android:inputType="textPersonName"
             android:text="" />
     </LinearLayout>
 
