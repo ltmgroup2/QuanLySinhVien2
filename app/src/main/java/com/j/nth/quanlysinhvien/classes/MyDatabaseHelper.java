@@ -54,6 +54,26 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         statement.executeUpdateDelete();
     }
+    public long insertAccount(NhanVien nhanVien)
+    {
+        SQLiteDatabase database = getWritableDatabase();
+
+        String sql = "INSERT INTO sql_account(USER_NAME,PASSWORD,PREMISSION) VALUES(?,?,?)";
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindString(1,nhanVien.getUSER_NAME());
+        statement.bindString(1,nhanVien.getPASSWORD());
+        statement.bindDouble(1, nhanVien.getPREMISSION());
+        long id = statement.executeInsert();
+        return id;
+    }
+
+    public Cursor getAccount(String username,String pass)
+    {
+        String sql= "SELECT * WHERE USER_NAME='"+username+"' AND PASSWORD='"+pass+"'";
+        SQLiteDatabase database = getReadableDatabase();
+        return database.rawQuery(sql,null);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
