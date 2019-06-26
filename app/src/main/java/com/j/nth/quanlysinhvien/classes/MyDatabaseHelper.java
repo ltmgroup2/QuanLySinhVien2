@@ -10,7 +10,7 @@ import android.util.Log;
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public MyDatabaseHelper(Context context) {
-        super(context, "QuanLyNhanVien.sqlite", null, 2);
+        super(context, "QuanLyNhanVien.sqlite", null, 3);
         getReadableDatabase();
         Log.i("DB", "dbManager");
     }

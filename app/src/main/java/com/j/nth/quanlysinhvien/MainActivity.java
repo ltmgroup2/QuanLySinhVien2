@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         txtTenSV = dialog.findViewById(R.id.txtTenSV);
         txtLop = dialog.findViewById(R.id.txtLop);
         txtNamSinh = dialog.findViewById(R.id.txtNamSinh);
-        txtChuyenNganh = dialog.findViewById(R.id.txtChuyenNganh);
+        //txtChuyenNganh = dialog.findViewById(R.id.txtChuyenNganh);
         avatar = dialog.findViewById(R.id.imageViewHinhSV);
         btnChonHinh = dialog.findViewById(R.id.btnLayHinhAnh);
         btnDongY = dialog.findViewById(R.id.btnDialogDongY);
