@@ -57,8 +57,21 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-
+        String sql_tableStaff="CREATE TABLE IF NOT EXISTS STAFF (" +
+                "STAFF_ID VARCHAR(100) PRIMARY KEY," +
+                "NAME_STAFF VARCHAR(100)," +
+                "AGE_STAFF INT," +
+                "ADDRESS VARCHAR(100)," +
+                "ID_ACCOUNT INTEGER" +
+                ")";
+        String sql_account = "CREATE TABLE IF NOT EXISTS ACCOUNT(" +
+                "ID_ACCOUNT INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "USER_NAME VARCHAR(200)," +
+                "PASSWORD VARCHAR(200)," +
+                "PREMISSION INT" +
+                ")";
+        db.execSQL(sql_tableStaff);
+        db.execSQL(sql_account);
     }
 
     @Override
