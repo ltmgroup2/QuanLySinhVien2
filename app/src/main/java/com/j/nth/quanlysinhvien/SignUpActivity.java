@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
                 //nếu tất cả điều kiện thỏa mãn
-                TaiKhoan taiKhoan = new TaiKhoan(null,user,pass,0);
+                TaiKhoan taiKhoan = new TaiKhoan(null,user,pass);
                 long ID_ACCOUNT = db.insertAccount(taiKhoan);
                 taiKhoan.setID_ACCOUNT(String.valueOf(ID_ACCOUNT));
                 Log.d("AAA",ID_ACCOUNT+"");

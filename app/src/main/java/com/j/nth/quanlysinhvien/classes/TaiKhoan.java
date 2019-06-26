@@ -4,13 +4,11 @@ public class TaiKhoan {
     String ID_ACCOUNT;
     String USER_NAME;
     String PASSWORD;
-    int PREMISSION;
 
-    public TaiKhoan(String ID_ACCOUNT, String USER_NAME, String PASSWORD, int PREMISSION) {
+    public TaiKhoan(String ID_ACCOUNT, String USER_NAME, String PASSWORD) {
         this.ID_ACCOUNT = ID_ACCOUNT;
         this.USER_NAME = USER_NAME;
         this.PASSWORD = PASSWORD;
-        this.PREMISSION = PREMISSION;
     }
 
     public String getID_ACCOUNT() {
@@ -35,13 +33,5 @@ public class TaiKhoan {
 
     public void setPASSWORD(String PASSWORD) {
         this.PASSWORD = PASSWORD;
-    }
-
-    public int getPREMISSION() {
-        return PREMISSION;
-    }
-
-    public void setPREMISSION(int PREMISSION) {
-        this.PREMISSION = PREMISSION;
     }
 }

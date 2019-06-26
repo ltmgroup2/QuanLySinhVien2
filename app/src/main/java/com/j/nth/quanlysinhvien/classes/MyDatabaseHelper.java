@@ -63,14 +63,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase database = getWritableDatabase();
 
-        String sql = "INSERT INTO ACCOUNT(USER_NAME,PASSWORD,PREMISSION) VALUES(?,?,?)";
+        String sql = "INSERT INTO ACCOUNT(USER_NAME,PASSWORD) VALUES(?,?)";
 
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
 
         statement.bindString(1,taiKhoan.getUSER_NAME());
         statement.bindString(2,taiKhoan.getPASSWORD());
-        statement.bindDouble(3, taiKhoan.getPREMISSION());
 
         return statement.executeInsert();
     }
@@ -118,8 +117,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         String sql_account = "CREATE TABLE IF NOT EXISTS ACCOUNT(" +
                 "ID_ACCOUNT INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "USER_NAME VARCHAR(200)," +
-                "PASSWORD VARCHAR(200)," +
-                "PREMISSION INT" +
+                "PASSWORD VARCHAR(200)" +
                 ")";
         db.execSQL(sql_tableStaff);
         db.execSQL(sql_account);
