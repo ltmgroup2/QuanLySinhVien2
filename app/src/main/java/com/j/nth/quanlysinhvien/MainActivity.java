@@ -1,6 +1,5 @@
 package com.j.nth.quanlysinhvien;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,12 +12,9 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,29 +23,23 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.j.nth.quanlysinhvien.adapter.adapterSV;
 import com.j.nth.quanlysinhvien.classes.MyDatabaseHelper;
-import com.j.nth.quanlysinhvien.classes.SinhVien;
+import com.j.nth.quanlysinhvien.classes.STAFF;
 
 import java.io.ByteArrayOutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -58,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private GridView gridView;
 
     private com.j.nth.quanlysinhvien.adapter.adapterSV adapterSV;
-    private ArrayList<SinhVien> sinhVienArrayList;
+    private ArrayList<STAFF> STAFFArrayList;
 
     private TextView txtTitle;
     MyDatabaseHelper db;
@@ -82,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
         EditText searchEditText =  searchViewExample.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setHintTextColor(Color.WHITE);
+        searchEditText.setTextColor(Color.WHITE);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
 
         db = new MyDatabaseHelper(this);
         //DropTable();
-        CreateTable();
+        //CreateTable();
 
-        sinhVienArrayList = new ArrayList<>();
-        adapterSV = new adapterSV(this, R.layout.layout_item_list_sv, sinhVienArrayList);
+        STAFFArrayList = new ArrayList<>();
+        adapterSV = new adapterSV(this, R.layout.layout_item_list_sv, STAFFArrayList);
         gridView.setAdapter(adapterSV);
         registerForContextMenu(gridView);
 
@@ -108,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                sinhVien = sinhVienArrayList.get(position);
+                STAFF = STAFFArrayList.get(position);
                 return false;
             }
         });
@@ -178,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     TextView txtTitleDialog;
-    EditText txtMaSV,txtTenSV,txtLop,txtNamSinh,txtChuyenNganh;
+    EditText edt_name,edt_age,edt_address;
     ImageView avatar;
     Button btnChonHinh,btnDongY,btnHuy;
 
@@ -186,27 +177,23 @@ public class MainActivity extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_add_student);
         txtTitleDialog = dialog.findViewById(R.id.txt_title_dialog);
-        txtMaSV = dialog.findViewById(R.id.txtMaSV);
-        txtTenSV = dialog.findViewById(R.id.txtTenSV);
-        txtLop = dialog.findViewById(R.id.txtLop);
-        txtNamSinh = dialog.findViewById(R.id.txtNamSinh);
-        //txtChuyenNganh = dialog.findViewById(R.id.txtChuyenNganh);
+        edt_name = dialog.findViewById(R.id.edt_name);
+        edt_age = dialog.findViewById(R.id.edt_age);
+        edt_address = dialog.findViewById(R.id.edt_address);
         avatar = dialog.findViewById(R.id.imageViewHinhSV);
         btnChonHinh = dialog.findViewById(R.id.btnLayHinhAnh);
         btnDongY = dialog.findViewById(R.id.btnDialogDongY);
         btnHuy = dialog.findViewById(R.id.btnDialogHuy);
 
         if (action.equals("Thêm")) {
-            txtTitleDialog.setText("Thêm Sinh Viên");
+            txtTitleDialog.setText("Thêm Nhân Viên");
         } else {
-            txtMaSV.setText(sinhVien.getMaSV());
-            txtTenSV.setText(sinhVien.getTenSV());
-            txtLop.setText(sinhVien.getLopSV());
-            txtNamSinh.setText(sinhVien.getNamSinh());
-            txtChuyenNganh.setText(sinhVien.getChuyenNganh());
-            avatar.setImageBitmap(BitmapFactory.decodeByteArray(sinhVien.getHinhAnh(),0,sinhVien.getHinhAnh().length));
-            txtMaSV.setEnabled(false);
-            txtTitleDialog.setText("Sửa Sinh Viên");
+            edt_name.setText(STAFF.getName());
+            edt_age.setText(STAFF.getAge());
+            edt_address.setText(STAFF.getAddress());
+
+            avatar.setImageBitmap(BitmapFactory.decodeByteArray(STAFF.getImage(),0, STAFF.getImage().length));
+            txtTitleDialog.setText("Sửa Nhân Viên");
         }
 
         btnChonHinh.setOnClickListener(new View.OnClickListener() {
@@ -220,47 +207,22 @@ public class MainActivity extends AppCompatActivity {
         btnDongY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(txtMaSV.getText().toString().equals("")||txtTenSV.getText().toString().equals("")||txtLop.getText().toString().equals("")||txtNamSinh.getText().toString().equals("")||txtChuyenNganh.getText().toString().equals("")) {
+                if(edt_name.getText().toString().equals("")||edt_age.getText().toString().equals("")||edt_address.getText().toString().equals("")) {
                     Toast.makeText(MainActivity.this,"Bạn chưa nhập đủ thông tin",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                try {
-                    if (checkNamSinh()) {
-                        Toast.makeText(MainActivity.this, "Năm sinh không đúng!", Toast.LENGTH_SHORT).show();
-                        return;
-                    } else {
-                        String arr[] = txtNamSinh.getText().toString().split("\\/");
-                        Calendar calendar = Calendar.getInstance();
-                        int nam = calendar.get(Calendar.YEAR);
-                        int nam2 = Integer.parseInt(arr[2]);
-                        if((nam - nam2) < 18) {
-                            Toast.makeText(MainActivity.this,"Không đủ tuổi",Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
 
-                }catch (Exception e)
-                {
-                    Toast.makeText(MainActivity.this,"Đã xảy ra lỗi trong quá trình xử lý",Toast.LENGTH_SHORT).show();
-                }
-                SinhVien sinhVien = new SinhVien(txtMaSV.getText().toString(),
-                        txtTenSV.getText().toString(),
-                        txtLop.getText().toString(),
-                        txtNamSinh.getText().toString(),
-                        txtChuyenNganh.getText().toString(),
+                STAFF STAFF = new STAFF(1,edt_name.getText().toString(),
+                        edt_age.getText().toString(),
+                        edt_address.getText().toString(),
                         ImageView_To_Byte(avatar)
                         );
                 if (action.equals("Thêm")) {
-                    if (checkSinhVien()) {
-                        Toast.makeText(MainActivity.this, "Sinh Viên Đã Tồn Tại!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(MainActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
-                        db.insertSinhVien(sinhVien);
-                    }
-
+                    Toast.makeText(MainActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
+                    db.insertSTAFF(STAFF);
                 } else {
                     Toast.makeText(MainActivity.this, "Sửa Thành Công", Toast.LENGTH_SHORT).show();
-                    db.updateSinhVien(sinhVien);
+                    db.updateSinhVien(STAFF);
                 }
                 LoadData();
 
@@ -276,46 +238,26 @@ public class MainActivity extends AppCompatActivity {
         });
         dialog.show();
     }
-    private boolean checkSinhVien() {
-        for (SinhVien sv : sinhVienArrayList) {
-            if (sv.getMaSV().equals(txtMaSV.getText().toString()))
-                return true;
-        }
-
-        return false;
-    }
-    private boolean checkNamSinh(){
-        String ns = txtNamSinh.getText().toString();
-        String date = ns.substring(0,2);
-        String month = ns.substring(3,5);
-        Log.d("ns",date+"||"+month);
-        if (ns.length() != 10) return true;
-        if (Integer.parseInt(date) > 31) {
-            return true;
-        } else {
-            if (Integer.parseInt(date) > 30 && (Integer.parseInt(month) == 4 || Integer.parseInt(month) == 6 || Integer.parseInt(month) == 9 || Integer.parseInt(month) == 11)) {
-                return true;
-            }
-            if (Integer.parseInt(date) > 29 && Integer.parseInt(month) == 2) {
-                return true;
-            }
-        }
-        if (Integer.parseInt(month) > 12) return true;
-        return false;
-    }
+//    private boolean checkSTAFF() {
+////        for (STAFF sv : STAFFArrayList) {
+////            if (sv.getId().equals(txtMaSV.getText().toString()))
+////                return true;
+////        }
+////
+////        return false;
+////    }
     private void LoadData() {
-        Cursor sv  = db.GetData("select * from SINHVIEN");
+        Cursor staff  = db.GetData("select * from STAFF");
 
-        sinhVienArrayList.clear();
-        while (sv.moveToNext()) {
+        STAFFArrayList.clear();
+        while (staff.moveToNext()) {
 
-            sinhVienArrayList.add(new SinhVien(
-                    sv.getString(0),
-                    sv.getString(1),
-                    sv.getString(2),
-                    sv.getString(3),
-                    sv.getString(4),
-                    sv.getBlob(5)
+            STAFFArrayList.add(new STAFF(
+                    staff.getInt(0),
+                    staff.getString(1),
+                    staff.getString(2),
+                    staff.getString(3),
+                    staff.getBlob(4)
             ));
         }
         adapterSV.notifyDataSetChanged();
@@ -342,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
     }
 
-    SinhVien sinhVien;
+    STAFF STAFF;
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -353,13 +295,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.delete:
                 // Xóa sinh viên
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Xóa Sinh Viên");
+                builder.setTitle("Xóa Nhân Viên");
                 builder.setMessage("Bạn có chắc muốn xóa không?");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String sql = "DELETE FROM SINHVIEN WHERE MASV = '"+sinhVien.getMaSV()+"'";
-                        Log.d("AAA",sinhVien.getMaSV());
+                        String sql = "DELETE FROM STAFF WHERE STAFF_ID = '"+ STAFF.getId()+"'";
+                        //Log.d("AAA", STAFF.getMaSV());
                         db.query(sql);
                         LoadData();
                         Toast.makeText(MainActivity.this, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
@@ -387,17 +329,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    private void CreateTable() {
-        String sql="CREATE TABLE IF NOT EXISTS SINHVIEN(MASV VARCHAR(200) PRIMARY KEY," +
-                "TENSV VARCHAR(200)," +
-                "LOPSV VARCHAR(200)," +
-                "NAMSINH VARCHAR(200)," +
-                "CN VARCHAR(200)," +
-                "HINHANH BLOB)";
-        db.query(sql);
-    }
+
     private void DropTable() {
-        String sql2= "DROP TABLE IF EXISTS SINHVIEN";
+        String sql2= "DROP TABLE IF EXISTS STAFF";
         db.query(sql2);
     }
 

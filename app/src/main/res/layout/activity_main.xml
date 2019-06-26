@@ -30,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Danh Sách Sinh Viên"
+                    android:text="Danh Sách Nhân Viên"
                     android:textColor="#fff"
                     android:textSize="20sp" />
 

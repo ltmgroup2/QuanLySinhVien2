@@ -10,7 +10,7 @@ import android.util.Log;
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public MyDatabaseHelper(Context context) {
-        super(context, "QuanLyNhanVien.sqlite", null, 3);
+        super(context, "QuanLyNhanVien.sqlite", null, 2);
         getReadableDatabase();
         Log.i("DB", "dbManager");
     }
@@ -27,33 +27,30 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(sql,null);
     }
-    public void insertSinhVien(SinhVien sinhVien) {
+    public void insertSTAFF(STAFF STAFF) {
         SQLiteDatabase database = getWritableDatabase();
-        String sql = "INSERT INTO SINHVIEN VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO STAFF (NAME_STAFF,AGE_STAFF,ADDRESS,IMAGE) VALUES(?,?,?,?)";
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
 
-        statement.bindString(1,sinhVien.getMaSV());
-        statement.bindString(2,sinhVien.getTenSV());
-        statement.bindString(3,sinhVien.getLopSV());
-        statement.bindString(4,sinhVien.getNamSinh().toString());
-        statement.bindString(5,sinhVien.getChuyenNganh());
-        statement.bindBlob(6,sinhVien.getHinhAnh());
+        statement.bindString(1, STAFF.getName());
+        statement.bindString(2, STAFF.getAge());
+        statement.bindString(3, STAFF.getAddress());
+        statement.bindBlob(4, STAFF.getImage());
 
         statement.executeInsert();
     }
-    public void updateSinhVien(SinhVien sinhVien) {
+    public void updateSinhVien(STAFF STAFF) {
         SQLiteDatabase database = getWritableDatabase();
-        String sql = "UPDATE SINHVIEN SET TENSV = ?,LOPSV = ?,CN = ?,NAMSINH = ?,HINHANH = ? WHERE MASV = ?";
+        String sql = "UPDATE STAFF SET NAME_STAFF = ?,AGE_STAFF = ?,ADDRESS = ?,IMAGE = ? WHERE STAFF_ID = ?";
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
 
-        statement.bindString(6,sinhVien.getMaSV());
-        statement.bindString(1,sinhVien.getTenSV());
-        statement.bindString(2,sinhVien.getLopSV());
-        statement.bindString(3,sinhVien.getNamSinh().toString());
-        statement.bindString(4,sinhVien.getChuyenNganh());
-        statement.bindBlob(5,sinhVien.getHinhAnh());
+        statement.bindLong(5, STAFF.getId());
+        statement.bindString(1, STAFF.getName());
+        statement.bindString(2, STAFF.getAge());
+        statement.bindString(3, STAFF.getAddress());
+        statement.bindBlob(4, STAFF.getImage());
 
         statement.executeUpdateDelete();
     }
@@ -108,11 +105,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.i("DB", "dbOnCreate");
+//        String sql2= "DROP TABLE IF EXISTS STAFF";
+//        db.execSQL(sql2);
         String sql_tableStaff="CREATE TABLE IF NOT EXISTS STAFF (" +
-                "STAFF_ID VARCHAR(100) PRIMARY KEY," +
+                "STAFF_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME_STAFF VARCHAR(100)," +
-                "BIRTH_STAFF VARCHAR(100)," +
-                "ADDRESS VARCHAR(100)" +
+                "AGE_STAFF INTEGER," +
+                "ADDRESS VARCHAR(100)," +
+                "IMAGE BLOB" +
                 ")";
         String sql_account = "CREATE TABLE IF NOT EXISTS ACCOUNT(" +
                 "ID_ACCOUNT INTEGER PRIMARY KEY AUTOINCREMENT," +

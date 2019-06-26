@@ -67,6 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
                 Intent it = new Intent(SignUpActivity.this,LoginActivity.class);
                 startActivity(it);
                 Toast.makeText(SignUpActivity.this, "Đăng Ký Thành Công", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
         txt_exist.setOnClickListener(new View.OnClickListener()

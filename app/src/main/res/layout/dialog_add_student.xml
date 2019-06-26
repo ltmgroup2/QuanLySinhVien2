@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical"
-    android:scrollbarAlwaysDrawVerticalTrack="true"
     android:orientation="vertical">
 
     <TextView
@@ -16,34 +11,10 @@
         android:background="@drawable/grdnt"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:text="Thêm Sinh Viên"
+        android:text="Thêm Nhân Viên"
         android:textColor="#fff"
         android:textSize="30sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:weightSum="10">
-
-        <TextView
-            android:id="@+id/textviewMSV"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:text="Mã NV:" />
-
-        <EditText
-            android:id="@+id/txtMaSV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:ems="10"
-            android:hint="Mã VN"
-            android:inputType="textPersonName"
-            android:text="" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,10 +28,10 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Tên VN" />
+            android:text="Nhân Viên" />
 
         <EditText
-            android:id="@+id/txtTenSV"
+            android:id="@+id/edt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="6"
@@ -82,16 +53,16 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Địa Chỉ NV" />
+            android:text="Tuổi" />
 
         <EditText
-            android:id="@+id/txtLop"
+            android:id="@+id/edt_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
-            android:hint="Địa Chỉ Nhân Viên"
-            android:inputType="textPersonName"
+            android:hint="Nhập Tuổi"
+            android:inputType="number"
             android:text="" />
     </LinearLayout>
 
@@ -107,16 +78,15 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Năm Sinh NV" />
+            android:text="Địa Chỉ" />
 
         <EditText
-            android:id="@+id/txtNamSinh"
+            android:id="@+id/edt_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
-            android:hint="dd/MM/yyyy"
-            android:inputType="datetime"
+            android:hint="Nhập Địa Chỉ"
             android:text="" />
     </LinearLayout>
 
@@ -145,8 +115,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:paddingBottom="10dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        android:paddingBottom="10dp">
 
         <Button
             android:id="@+id/btnDialogDongY"
@@ -171,4 +141,3 @@
 
 
 </LinearLayout>
-</ScrollView>

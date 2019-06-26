@@ -12,32 +12,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.j.nth.quanlysinhvien.R;
-import com.j.nth.quanlysinhvien.classes.SinhVien;
+import com.j.nth.quanlysinhvien.classes.STAFF;
 
 import java.util.ArrayList;
 
 public class adapterSV extends BaseAdapter {
     Context context;
     int layout;
-    ArrayList<SinhVien> sinhVienArrayList;
-    ArrayList<SinhVien> filterList;
+    ArrayList<STAFF> STAFFArrayList;
+    ArrayList<STAFF> filterList;
     CustomFilter filter;
 
-    public adapterSV(Context context, int layout, ArrayList<SinhVien> sinhVienArrayList) {
+    public adapterSV(Context context, int layout, ArrayList<STAFF> STAFFArrayList) {
         this.context = context;
         this.layout = layout;
-        this.sinhVienArrayList = sinhVienArrayList;
-        filterList = sinhVienArrayList;
+        this.STAFFArrayList = STAFFArrayList;
+        filterList = STAFFArrayList;
     }
 
     @Override
     public int getCount() {
-        return sinhVienArrayList.size();
+        return STAFFArrayList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return sinhVienArrayList.get(position);
+        return STAFFArrayList.get(position);
     }
 
     @Override
@@ -69,11 +69,11 @@ public class adapterSV extends BaseAdapter {
         {
             holder = (viewHolder) convertView.getTag();
         }
-        SinhVien sinhVien = sinhVienArrayList.get(position);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(sinhVien.getHinhAnh(),0,sinhVien.getHinhAnh().length);
+        STAFF STAFF = STAFFArrayList.get(position);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(STAFF.getImage(),0, STAFF.getImage().length);
         holder.imageViewHinh.setImageBitmap(bitmap);
-        holder.txtTenSV.setText(sinhVien.getTenSV());
-        holder.txtLop.setText(sinhVien.getLopSV());
+        holder.txtTenSV.setText(STAFF.getName());
+        holder.txtLop.setText(STAFF.getAddress());
         return convertView;
     }
     public Filter getFilter() {
@@ -91,9 +91,9 @@ public class adapterSV extends BaseAdapter {
 
             if (constraint != null && constraint.length() > 0) {
                 constraint = constraint.toString().toLowerCase();
-                ArrayList<SinhVien> filters = new ArrayList<>();
-                for (SinhVien sv : filterList) {
-                    if (sv.getTenSV().toLowerCase().contains(constraint) || sv.getLopSV().toLowerCase().contains(constraint)) {
+                ArrayList<STAFF> filters = new ArrayList<>();
+                for (STAFF sv : filterList) {
+                    if (sv.getName().toLowerCase().contains(constraint) || sv.getAddress().toLowerCase().contains(constraint)) {
                         filters.add(sv);
                     }
                 }
@@ -109,7 +109,7 @@ public class adapterSV extends BaseAdapter {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            sinhVienArrayList = (ArrayList<SinhVien>) results.values;
+            STAFFArrayList = (ArrayList<STAFF>) results.values;
             notifyDataSetChanged();
         }
     }
