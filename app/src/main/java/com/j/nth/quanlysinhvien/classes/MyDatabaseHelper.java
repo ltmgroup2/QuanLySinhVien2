@@ -5,11 +5,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public MyDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+        getReadableDatabase();
+        Log.i("DB", "dbManager");
     }
 
     //truy vankhong tra ve kq
@@ -54,29 +57,44 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         statement.executeUpdateDelete();
     }
-    public long insertAccount(NhanVien nhanVien)
+
+    //khi đăng kí xong thì sẽ trả về mã của tài khoản vừa đăng kí.
+    public long insertAccount(TaiKhoan taiKhoan)
     {
         SQLiteDatabase database = getWritableDatabase();
 
-        String sql = "INSERT INTO sql_account(USER_NAME,PASSWORD,PREMISSION) VALUES(?,?,?)";
+        String sql = "INSERT INTO ACCOUNT(USER_NAME,PASSWORD,PREMISSION) VALUES(?,?,?)";
+
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
-        statement.bindString(1,nhanVien.getUSER_NAME());
-        statement.bindString(1,nhanVien.getPASSWORD());
-        statement.bindDouble(1, nhanVien.getPREMISSION());
-        long id = statement.executeInsert();
-        return id;
+
+        statement.bindString(1,taiKhoan.getUSER_NAME());
+        statement.bindString(2,taiKhoan.getPASSWORD());
+        statement.bindDouble(3, taiKhoan.getPREMISSION());
+
+        return statement.executeInsert();
     }
 
     public Cursor getAccount(String username,String pass)
     {
-        String sql= "SELECT * WHERE USER_NAME='"+username+"' AND PASSWORD='"+pass+"'";
+        String sql= "SELECT * FROM ACCOUNT WHERE USER_NAME='"+username+"' AND PASSWORD='"+pass+"'";
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(sql,null);
     }
 
+    public boolean check_exist_user(String user)
+    {
+        String sql= "SELECT * FROM ACCOUNT WHERE USER_NAME='"+user+"'";
+        Log.d("AAA",sql);
+        SQLiteDatabase database = getReadableDatabase();
+        if(database.rawQuery(sql,null).getCount()>0)
+            return true;
+        return false;
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.i("DB", "dbOnCreate");
         String sql_tableStaff="CREATE TABLE IF NOT EXISTS STAFF (" +
                 "STAFF_ID VARCHAR(100) PRIMARY KEY," +
                 "NAME_STAFF VARCHAR(100)," +

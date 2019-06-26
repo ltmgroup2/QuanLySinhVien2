@@ -1,12 +1,12 @@
 package com.j.nth.quanlysinhvien.classes;
 
-public class NhanVien {
+public class TaiKhoan {
     String ID_ACCOUNT;
     String USER_NAME;
     String PASSWORD;
     int PREMISSION;
 
-    public NhanVien(String ID_ACCOUNT, String USER_NAME, String PASSWORD, int PREMISSION) {
+    public TaiKhoan(String ID_ACCOUNT, String USER_NAME, String PASSWORD, int PREMISSION) {
         this.ID_ACCOUNT = ID_ACCOUNT;
         this.USER_NAME = USER_NAME;
         this.PASSWORD = PASSWORD;
