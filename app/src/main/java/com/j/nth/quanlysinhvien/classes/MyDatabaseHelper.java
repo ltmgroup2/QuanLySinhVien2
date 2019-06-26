@@ -9,8 +9,8 @@ import android.util.Log;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
-    public MyDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public MyDatabaseHelper(Context context) {
+        super(context, "QuanLyNhanVien.sqlite", null, 2);
         getReadableDatabase();
         Log.i("DB", "dbManager");
     }
@@ -77,17 +77,31 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAccount(String username,String pass)
     {
-        String sql= "SELECT * FROM ACCOUNT WHERE USER_NAME='"+username+"' AND PASSWORD='"+pass+"'";
+        String sql= "SELECT * FROM ACCOUNT WHERE USER_NAME= ? AND PASSWORD= ?";
         SQLiteDatabase database = getReadableDatabase();
-        return database.rawQuery(sql,null);
+        return database.rawQuery(sql,new String[]{username,pass});
+    }
+
+    public long check_exist_user(String user,String pass)
+    {
+        String sql= "SELECT * FROM ACCOUNT WHERE USER_NAME= ? AND PASSWORD= ?";
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor cursor =  database.rawQuery(sql,new String[]{user,pass});
+        try {
+            cursor.moveToFirst();
+            return cursor.getInt(0);
+        }
+        catch (Exception e) {
+            return -1;
+        }
     }
 
     public boolean check_exist_user(String user)
     {
-        String sql= "SELECT * FROM ACCOUNT WHERE USER_NAME='"+user+"'";
+        String sql= "SELECT * FROM ACCOUNT WHERE USER_NAME= ?";
         Log.d("AAA",sql);
         SQLiteDatabase database = getReadableDatabase();
-        if(database.rawQuery(sql,null).getCount()>0)
+        if(database.rawQuery(sql,new String[]{user}).getCount()>0)
             return true;
         return false;
     }

@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         });
         gridView = findViewById(R.id.grid_view);
 
-        db = new MyDatabaseHelper(this,"QuanLySinhVien.sqlite",null,2);
+        db = new MyDatabaseHelper(this);
         //DropTable();
         CreateTable();
 

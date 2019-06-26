@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
                 //kiểm tra xem tài khoản đã tồn tại chưa
-                db = new MyDatabaseHelper(SignUpActivity.this,"QuanLyNhanVien.sqlite",null,2);
+                db = new MyDatabaseHelper(SignUpActivity.this);
                 if(db.check_exist_user(user))
                 {
                     Toast.makeText(SignUpActivity.this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
