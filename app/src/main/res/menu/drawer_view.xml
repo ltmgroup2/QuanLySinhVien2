@@ -6,7 +6,15 @@
             android:title="Trang Chủ"/>
         <item android:id="@+id/rateUs"
             android:icon="@drawable/ic_stars_black_24dp"
-            android:title="Liên Hệ: (028) 3811.0521"/>
+            android:title="Liên Hệ: (028) 4561.0521"/>
+
+
+    </group>
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/signOut"
+            android:icon="@drawable/ic_flight_takeoff_black_24dp"
+            android:title="Đăng Xuất"/>
 
     </group>
 </menu>

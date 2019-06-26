@@ -5,4 +5,7 @@
     <string name="donate">Donate</string>
     <string name="feedback">Feedback</string>
     <string name="moretutorials">More Tutorials</string>
+    <string name="lbl_set_profile_photo">Chọn Ảnh</string>
+    <string name="lbl_take_camera_picture">Camera</string>
+    <string name="lbl_choose_from_gallery">Chọn Từ Thư Viện Ảnh</string>
 </resources>

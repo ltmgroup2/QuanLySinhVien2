@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = edt_pass.getText().toString();
                 if(user.equals("")||pass.equals(""))
                 {
-                    Toast.makeText(LoginActivity.this,"Bạn chưa nhập tài khoản hoặc",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Bạn chưa nhập đủ thông tin",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 long ID_ACCOUNT= db.check_exist_user(user,pass);
@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent it = new Intent(LoginActivity.this, MainActivity.class);
                 it.putExtra("ID_ACCOUNT",ID_ACCOUNT);
                 startActivity(it);
+                finish();
             }
         });
 
@@ -60,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             {
                 Intent intent_signUp = new Intent(LoginActivity.this,SignUpActivity.class);
                 startActivity(intent_signUp);
+                finish();
             }
         });
     }

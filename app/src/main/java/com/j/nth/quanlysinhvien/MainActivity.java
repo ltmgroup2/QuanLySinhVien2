@@ -79,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
 
         Navigation();
 
+
+        EditText searchEditText =  searchViewExample.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setHintTextColor(Color.WHITE);
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,12 +123,17 @@ public class MainActivity extends AppCompatActivity {
                 menuItem.setChecked(true);
                 switch (menuItem.getItemId()) {
                     case R.id.android:
-                        Toast.makeText(MainActivity.this, "https://ltt.edu.vn", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "https://www.fpt-software.com/", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.rateUs:
                         Intent intent = new Intent(Intent.ACTION_DIAL);
                         intent.setData(Uri.parse("tel:02838110521"));
                         startActivity(intent);
+                        break;
+                    case R.id.signOut:
+                        Intent intent2 = new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intent2);
+                        finish();
                         break;
 
                 }
@@ -391,4 +400,5 @@ public class MainActivity extends AppCompatActivity {
         String sql2= "DROP TABLE IF EXISTS SINHVIEN";
         db.query(sql2);
     }
+
 }

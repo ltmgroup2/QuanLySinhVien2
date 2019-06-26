@@ -104,11 +104,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:orientation="vertical"
         android:layout_marginBottom="400dp">
+        <TextView
+            android:text="Quản Lý Sinh Viên"
+            android:textSize="30sp"
+            android:textColor="#FFF"
+            android:typeface="monospace"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/ibytes"
             />
+
     </LinearLayout>
 </RelativeLayout>
