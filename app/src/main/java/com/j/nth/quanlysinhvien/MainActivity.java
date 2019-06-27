@@ -212,17 +212,18 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                STAFF STAFF = new STAFF(1,edt_name.getText().toString(),
+                STAFF STAFF2 = new STAFF(1,edt_name.getText().toString(),
                         edt_age.getText().toString(),
                         edt_address.getText().toString(),
                         ImageView_To_Byte(avatar)
                         );
                 if (action.equals("Thêm")) {
                     Toast.makeText(MainActivity.this, "Thêm Thành Công", Toast.LENGTH_SHORT).show();
-                    db.insertSTAFF(STAFF);
+                    db.insertSTAFF(STAFF2);
                 } else {
+                    STAFF2.setId(STAFF.getId());
                     Toast.makeText(MainActivity.this, "Sửa Thành Công", Toast.LENGTH_SHORT).show();
-                    db.updateSinhVien(STAFF);
+                    db.updateSTAFF(STAFF2);
                 }
                 LoadData();
 

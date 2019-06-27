@@ -40,7 +40,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         statement.executeInsert();
     }
-    public void updateSinhVien(STAFF STAFF) {
+    public void updateSTAFF(STAFF STAFF) {
         SQLiteDatabase database = getWritableDatabase();
         String sql = "UPDATE STAFF SET NAME_STAFF = ?,AGE_STAFF = ?,ADDRESS = ?,IMAGE = ? WHERE STAFF_ID = ?";
         SQLiteStatement statement = database.compileStatement(sql);

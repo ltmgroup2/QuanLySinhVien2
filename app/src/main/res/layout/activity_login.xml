@@ -107,7 +107,7 @@
         android:orientation="vertical"
         android:layout_marginBottom="400dp">
         <TextView
-            android:text="Quản Lý Sinh Viên"
+            android:text="Quản Lý Nhân Viên"
             android:textSize="30sp"
             android:textColor="#FFF"
             android:typeface="monospace"
